@@ -1,3 +1,4 @@
+const HDWalletProvider = require("@truffle/hdwallet-provider");
 /**
  * Use this file to configure your truffle project. It's seeded with some
  * common settings for different networks and features like migrations,
@@ -25,6 +26,7 @@
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
 module.exports = {
+	contracts_build_directory: "./contracts",
   /**
    * Networks define how you connect to your ethereum client and let you set the
    * defaults web3 uses to send transactions. If you don't specify one truffle
@@ -42,11 +44,26 @@ module.exports = {
     // tab if you use this network and you must also set the `host`, `port` and `network_id`
     // options below to some value.
     //
-    // development: {
-    //  host: "127.0.0.1",     // Localhost (default: none)
-    //  port: 8545,            // Standard Ethereum port (default: none)
-    //  network_id: "*",       // Any network (default: none)
-    // },
+     development: {
+      host: "127.0.0.1",     // Localhost (default: none)
+      port: 8545,            // Standard Ethereum port (default: none)
+      network_id: "*",       // Any network (default: none)
+     },
+	 goerli: {
+		 provider: () => {
+			 const mnemonic = "middle tongue raise wedding nominee photo change smile oak forward combine label";
+			 return new HDWalletProvider(mnemonic, "http://127.0.0.1:8545");
+		 },
+		 network_id: "*",
+	 },
+	 ropsten: {
+		 provider: () => {
+			 const mnemonic = "middle tongue raise wedding nominee photo change smile oak forward combine label";
+			 const project_id = "https://ropsten.infura.io/v3/394365a23673482992b8518f93532d24";
+			 return new HDWalletProvider(mnemonic, project_id);
+		 },
+		 network_id: "*"
+	 }
     // Another network with more advanced options...
     // advanced: {
     // port: 8777,             // Custom port
